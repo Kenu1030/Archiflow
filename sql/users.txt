@@ -1,0 +1,34 @@
+admin role
+username : admin
+email : admin@archiflow.com
+password : admin123
+
+employee > architects
+username : SonnyDreke
+email : Sonny@archiflow.com
+password : Sonny@123
+
+employee > project manager
+username : Renato
+email : renato@archiflow.com
+password : Renato@123
+
+hr role
+username : Kenu
+email : kenu@archiflow.com
+password : Kenu@123
+
+client role
+username : Carl
+email : carl@archiflow.com
+password : Carl@1234
+
+client role
+username : Quennie
+email : quennie@archiflow.com
+password : Quennie@1234
+
+senior architect role
+username : Raven
+email: dianon@archiflow.com
+password : Dianon@123
