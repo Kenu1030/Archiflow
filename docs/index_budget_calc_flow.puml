@@ -1,0 +1,38 @@
+@startuml
+' Budget Calculator Front-end Flow (index.php)
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title Budget Calculator Flow (Front-end JS in index.php)
+
+start
+:Page load;
+:Initialize formatter and constants\n(BASE, QUALITY, COMPLEXITY, FLOOR_MULTI_STEP);
+:Bind event listeners\n(inputs: change/input; buttons: Calculate, Reset, CTA);
+:calc();
+repeat
+  :User changes inputs or clicks Calculate;
+  :Read current inputs\n(type, area, unit, quality, floors, complexity);
+  :Convert area to sqm if unit == sqft;
+  :Compute multiplier = QUALITY * COMPLEXITY * FLOOR_MULTI_STEP;
+  :baseCost = baseRate[type] * sqm * multiplier;
+  :contingency = baseCost * 0.10;
+  :total = baseCost + contingency;
+  :Update UI (#bc-total, #bc-base, #bc-area-out,\n #bc-mults, #bc-cont, #bc-note, #bc-updated);
+repeat while (more user input?)
+if (User clicks Reset) then (yes)
+  :Reset inputs to defaults;
+  :calc();
+endif
+if (User clicks "Request Detailed Quote") then (yes)
+  if (Contact form present?) then (yes)
+    :Prefill contact form subject + message\nwith computed estimate;
+    :Smooth scroll to #contact section;
+  else (no)
+    :Open mailto: link with encoded message;
+  endif
+endif
+stop
+
+@enduml

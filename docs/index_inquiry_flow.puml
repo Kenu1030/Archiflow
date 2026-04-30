@@ -1,0 +1,61 @@
+@startuml
+' Public Inquiry Submission Flow for index.php
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam activity {
+  BackgroundColor<<success>> #e6ffed
+  BackgroundColor<<error>> #ffe6e6
+}
+
+title Public Inquiry Submission Flow (index.php)
+
+start
+:Page requested;
+if (HTTP method == POST and public_inquiry_submit present?) then (yes)
+  :Read and trim inputs
+  (first_name, last_name, email,
+   subject, message);
+  if (Any field empty?) then (yes)
+    :Set inq_error = "All fields are required.";
+    stop
+  else (no)
+    if (Email invalid?) then (yes)
+      :Set inq_error = "Invalid email address.";
+      stop
+    else (no)
+      :Connect DB (getDB)\nERRMODE_EXCEPTION;
+      :Ensure table public_inquiries exists;
+      :Attempt to ADD COLUMN assigned_to if missing;
+      :Discover SA candidates from users\n(role='senior_architect' OR position contains 'senior architect');
+      if (Any candidates?) then (yes)
+        :For each candidate, COUNT active inquiries\nstatus IN ('new','in_review');
+        :Pick least-loaded (tie-break: lowest id);
+        :assignedTo = chosen id;
+      else (no)
+        :assignedTo = NULL;
+      endif
+      :INSERT INTO public_inquiries\n(name,email,inquiry_type,message,status='new',assigned_to);
+      :Ensure table notifications exists\n(user_id,title,message,type,is_read,...);
+      :Find admins in users\n(role='admin' OR position contains 'admin');
+      if (Admins found?) then (yes)
+        :INSERT notifications\nfor each admin ("New Public Inquiry");
+      endif
+      if (assignedTo NOT NULL) then (yes)
+        :INSERT notification for SA\n("New Inquiry Assigned");
+      endif
+      :inq_success = true <<success>>;
+    endif
+  endif
+else (no)
+  :GET request; continue to render;
+endif
+:Render sections\n(Hero, Features, Services, About, Budget, Contact);
+if (inq_success) then (yes)
+  :Show success toast/banner;
+elseif (inq_error) then (yes)
+  :Show error banner with message <<error>>;
+endif
+stop
+
+@enduml
