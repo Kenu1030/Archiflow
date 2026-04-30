@@ -1,0 +1,145 @@
+/* Admin Dashboard Modern Theme - Bootstrap Enhanced */
+:root {
+	--admin-accent: var(--primary-600);
+	--admin-accent-2: var(--primary-500);
+	--admin-accent-rgb: var(--primary-rgb);
+	--admin-bg-gradient: radial-gradient(1200px 800px at 10% 10%, rgba(var(--primary-rgb), 0.08), transparent 60%),
+		linear-gradient(180deg, rgba(var(--primary-rgb), 0.04), transparent 40%);
+}
+
+body {
+	display: block;
+	min-height: 100vh;
+	background: var(--surface-secondary);
+	background-image: var(--admin-bg-gradient);
+}
+
+.dashboard-container {
+	position: relative;
+	border: 1px solid rgba(var(--primary-rgb), 0.15);
+	background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
+	backdrop-filter: blur(10px);
+	box-shadow: var(--shadow-xl);
+	border-radius: var(--radius-xl);
+}
+}
+
+.dashboard-container h1,
+.dashboard-container h2 {
+	background: linear-gradient(135deg, var(--admin-accent), var(--admin-accent-2));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+.stat-card {
+	border: 1px solid rgba(111,66,193,0.15);
+	background: linear-gradient(180deg, #ffffff, #fafbff);
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.stat-card:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 10px 24px rgba(111,66,193,0.12);
+}
+
+.btn,
+.btn-warning,
+.btn-success,
+.btn-danger {
+	background: linear-gradient(135deg, var(--admin-accent), var(--admin-accent-2));
+	box-shadow: 0 6px 16px rgba(111,66,193,0.18);
+}
+
+.btn:hover,
+.btn-warning:hover,
+.btn-success:hover,
+.btn-danger:hover {
+	filter: brightness(1.05);
+	transform: translateY(-1px);
+}
+
+table {
+	border: 1px solid rgba(0,0,0,0.06);
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+th {
+	background: linear-gradient(180deg, #f7f7fb, #f0f1f6);
+}
+
+tr:hover td {
+	background: rgba(111,66,193,0.04);
+}
+
+/* === Responsive & Layout Enhancements (added) ======================== */
+.dashboard-container { width:100%; max-width:1280px; margin:0 auto; padding:1.25rem 1.5rem; box-sizing:border-box; }
+
+.dashboard-container h1, .dashboard-container h2, .dashboard-container h3 { text-align:center; line-height:1.15; margin-top:0; }
+
+.stat-cards, .dashboard-grid { display:grid; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); gap:1rem; align-items:stretch; }
+
+table { width:100%; border-collapse:collapse; }
+.table-responsive, .scroll-x { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.table-responsive > table, .scroll-x > table { min-width:760px; }
+
+table th, table td { white-space:nowrap; padding:.55rem .75rem; font-size:.95rem; }
+.wrap-cells th, .wrap-cells td { white-space:normal; }
+
+form .form-grid, .form-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem 1.25rem; }
+
+.actions-row { display:flex; flex-wrap:wrap; gap:.6rem; }
+
+.mb-0 { margin-bottom:0!important; } .mb-1 { margin-bottom:.5rem!important; } .mb-2 { margin-bottom:1rem!important; }
+
+.overflow-auto { overflow:auto; }
+
+h1 { font-size:clamp(1.65rem, 1.2rem + 1.6vw, 2.4rem); }
+h2 { font-size:clamp(1.25rem, 1rem + 1vw, 1.85rem); }
+h3 { font-size:clamp(1.05rem, .9rem + .6vw, 1.35rem); }
+
+@media (max-width: 900px) {
+	.stat-cards, .dashboard-grid { grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); }
+	table th, table td { font-size:.88rem; }
+}
+@media (max-width: 600px) {
+	.stat-cards, .dashboard-grid { grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); }
+	.dashboard-container { padding:1rem .9rem; }
+	table th, table td { padding:.45rem .55rem; }
+}
+
+*:focus { outline:2px solid var(--admin-accent-2); outline-offset:2px; }
+
+@media (prefers-reduced-motion: reduce) { .stat-card, .btn { transition:none!important; animation:none!important; } }
+
+.progress-bar {
+	border: 1px solid rgba(111,66,193,0.15);
+}
+
+.progress-fill {
+	background: linear-gradient(90deg, var(--admin-accent), var(--admin-accent-2));
+	animation: fillPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes fillPulse {
+	0%, 100% { filter: brightness(1); }
+	50% { filter: brightness(1.15); }
+}
+
+.log-entry { box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+
+.bulk-actions { border: 1px dashed rgba(255,193,7,0.5); }
+
+/* Maintenance result panel */
+#maintenanceResult .success-msg,
+#maintenanceResult .error-msg {
+	animation: slideIn 240ms ease;
+}
+
+@keyframes slideIn {
+	from { opacity: 0; transform: translateY(6px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+

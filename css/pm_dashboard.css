@@ -1,0 +1,136 @@
+/* Project Manager Dashboard Theme - Bootstrap Enhanced */
+:root { 
+  --pm-accent: var(--info-500); 
+  --pm-accent-2: var(--info-400); 
+  --pm-accent-rgb: var(--info-rgb);
+}
+
+body { 
+  display: block; 
+  min-height: 100vh; 
+  background: var(--surface-secondary); 
+  background-image: linear-gradient(180deg, rgba(var(--info-rgb), 0.08), transparent 40%); 
+}
+
+.dashboard-container { 
+  border: 1px solid rgba(var(--info-rgb), 0.15); 
+  background: linear-gradient(180deg, var(--surface-primary), var(--info-50)); 
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-xl);
+}
+
+.dashboard-container h1, .dashboard-container h2 { 
+  background: var(--gradient-info); 
+  -webkit-background-clip: text; 
+  background-clip: text; 
+  color: transparent; 
+  font-weight: var(--font-weight-bold);
+}
+
+.stat-card { 
+  border: 1px solid rgba(var(--info-rgb), 0.15); 
+  background: var(--surface-primary); 
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg);
+  transition: var(--transition-base);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--info-300);
+}
+
+.btn { 
+  background: var(--gradient-info); 
+  box-shadow: 0 6px 16px rgba(var(--info-rgb), 0.25); 
+  border: none;
+  font-weight: var(--font-weight-medium);
+  transition: var(--transition-base);
+}
+
+.btn:hover { 
+  transform: translateY(-2px); 
+  filter: brightness(1.1); 
+  box-shadow: 0 8px 20px rgba(var(--info-rgb), 0.35);
+}
+
+.progress-fill { 
+  background: var(--gradient-info); 
+  border-radius: var(--radius);
+}
+
+table { 
+  border: 1px solid var(--border-primary); 
+  border-radius: var(--radius-lg); 
+  overflow: hidden; 
+  box-shadow: var(--shadow-sm);
+  background: var(--surface-primary);
+}
+
+table th {
+  background: var(--info-50);
+  color: var(--info-800);
+  font-weight: var(--font-weight-semibold);
+}
+
+tr:hover td { 
+  background: rgba(var(--info-rgb), 0.06); 
+  transform: scale(1.01);
+}
+
+/* === Responsive & Layout Enhancements (added) ======================== */
+/* Constrain content width and center container */
+.dashboard-container { width:100%; max-width:1280px; margin:0 auto; padding:1.25rem 1.5rem; box-sizing:border-box; }
+
+/* Center headings consistently */
+.dashboard-container h1, .dashboard-container h2, .dashboard-container h3 { text-align:center; line-height:1.15; margin-top:0; }
+
+/* Flexible grid helper for stats / cards */
+.stat-cards, .dashboard-grid { display:grid; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); gap:1rem; align-items:stretch; }
+
+/* Make tables adapt & allow horizontal scroll without zooming */
+table { width:100%; border-collapse:collapse; }
+.table-responsive, .scroll-x { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.table-responsive > table, .scroll-x > table { min-width:760px; }
+
+/* Ensure cells wrap instead of forcing viewport shrink */
+table th, table td { white-space:nowrap; padding:.55rem .75rem; font-size:.95rem; }
+.wrap-cells th, .wrap-cells td { white-space:normal; }
+
+/* Form layout auto-fit */
+form .form-grid, .form-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem 1.25rem; }
+
+/* Buttons spacing on mobile */
+.actions-row { display:flex; flex-wrap:wrap; gap:.6rem; }
+
+/* Utility spacing */
+.mb-0 { margin-bottom:0!important; } .mb-1 { margin-bottom:.5rem!important; } .mb-2 { margin-bottom:1rem!important; }
+
+/* Handle very wide code/text blocks */
+.overflow-auto { overflow:auto; }
+
+/* Responsive typography scaling (clamp) */
+h1 { font-size:clamp(1.65rem, 1.2rem + 1.6vw, 2.4rem); }
+h2 { font-size:clamp(1.25rem, 1rem + 1vw, 1.85rem); }
+h3 { font-size:clamp(1.05rem, .9rem + .6vw, 1.35rem); }
+
+/* Media queries for tighter screens */
+@media (max-width: 900px) {
+	.stat-cards, .dashboard-grid { grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); }
+	table th, table td { font-size:.88rem; }
+}
+@media (max-width: 600px) {
+	.stat-cards, .dashboard-grid { grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); }
+	.dashboard-container { padding:1rem .9rem; }
+	table th, table td { padding:.45rem .55rem; }
+}
+
+/* Subtle focus styles for accessibility */
+*:focus { outline:2px solid var(--pm-accent-2); outline-offset:2px; }
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+	.stat-card, .btn { transition:none!important; animation:none!important; }
+}
+

@@ -1,0 +1,218 @@
+/* Ultimate Zoom-Resistant Layout System */
+
+/* Force all layout elements to fixed scale */
+html {
+  font-size: 16px !important;
+  zoom: 1 !important;
+  -webkit-text-size-adjust: none !important;
+  -moz-text-size-adjust: none !important;
+  -ms-text-size-adjust: none !important;
+  text-size-adjust: none !important;
+}
+
+body {
+  zoom: 1 !important;
+  transform: scale(1) !important;
+  transform-origin: top left !important;
+  min-zoom: 1 !important;
+  max-zoom: 1 !important;
+  user-zoom: fixed !important;
+}
+
+/* Fixed layout containers */
+.top-bar,
+.main-nav,
+.sidebar,
+.content-wrapper,
+.dashboard-container,
+.page-loader {
+  zoom: 1 !important;
+  transform: scale(1) !important;
+  -webkit-transform: scale(1) !important;
+  -moz-transform: scale(1) !important;
+  -ms-transform: scale(1) !important;
+  transform-origin: top left !important;
+}
+
+/* Prevent zoom scaling on containers */
+.container,
+.container-fluid,
+.row,
+.col,
+[class*="col-"] {
+  zoom: 1 !important;
+  transform: scale(1) !important;
+}
+
+/* Fixed navigation dimensions */
+.top-bar {
+  height: 70px !important;
+  min-height: 70px !important;
+  max-height: 70px !important;
+}
+
+.main-nav {
+  height: 56px !important;
+  min-height: 56px !important;
+  max-height: 56px !important;
+}
+
+/* Fixed sidebar width */
+.sidebar {
+  width: 280px !important;
+  min-width: 280px !important;
+  max-width: 280px !important;
+}
+
+/* Fixed content margins */
+.content-wrapper {
+  margin-top: 126px !important; /* 70px + 56px */
+  margin-left: 0 !important;
+}
+
+@media (min-width: 769px) {
+  body.sidebar-open .content-wrapper {
+    margin-left: 280px !important;
+  }
+}
+
+/* Fixed button and form element sizes */
+button,
+.btn,
+input,
+select,
+textarea {
+  zoom: 1 !important;
+  transform: scale(1) !important;
+}
+
+/* Fixed card and component sizes */
+.card,
+.stat-card,
+.metric-card {
+  zoom: 1 !important;
+  transform: scale(1) !important;
+}
+
+/* Fixed table dimensions */
+table,
+.table {
+  zoom: 1 !important;
+  transform: scale(1) !important;
+}
+
+/* Fixed form dimensions */
+form {
+  zoom: 1 !important;
+  transform: scale(1) !important;
+}
+
+/* Mobile adjustments with fixed scaling */
+@media (max-width: 768px) {
+  .top-bar {
+    height: 60px !important;
+    min-height: 60px !important;
+    max-height: 60px !important;
+  }
+  
+  .main-nav {
+    height: 48px !important;
+    min-height: 48px !important;
+    max-height: 48px !important;
+  }
+  
+  .content-wrapper {
+    margin-top: 108px !important; /* 60px + 48px */
+    margin-left: 0 !important;
+  }
+  
+  .sidebar {
+    width: 280px !important;
+    transform: translateX(-100%) !important;
+  }
+  
+  .sidebar.open {
+    transform: translateX(0) !important;
+  }
+}
+
+/* Prevent any transform scaling */
+* {
+  -webkit-transform-style: preserve-3d !important;
+  transform-style: preserve-3d !important;
+}
+
+/* Override any zoom or scale properties */
+*:not(.main-nav a):not(.nav-link) {
+  zoom: inherit !important;
+}
+
+/* Text should still be readable - allow browser zoom on text only */
+h1, h2, h3, h4, h5, h6,
+p, span, div:not(.logo):not(.brand-logo),
+li, td, th,
+label, input::placeholder {
+  /* Allow text to scale with browser zoom while keeping layout fixed */
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* Specific overrides for problematic elements */
+.dashboard-container {
+  width: 100% !important;
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  padding: 2rem !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure grid layouts stay fixed */
+.grid,
+.dashboard-grid,
+.stat-cards {
+  zoom: 1 !important;
+  transform: scale(1) !important;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+  gap: 1.5rem !important;
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2),
+       (min-resolution: 192dpi) {
+  body,
+  .top-bar,
+  .main-nav,
+  .sidebar,
+  .content-wrapper {
+    zoom: 1 !important;
+    transform: scale(1) !important;
+  }
+}
+
+/* Force browser zoom override */
+@supports (zoom: 1) {
+  body * {
+    zoom: 1 !important;
+  }
+}
+
+/* Webkit zoom override */
+@supports (-webkit-transform: scale(1)) {
+  body * {
+    -webkit-transform: scale(1) !important;
+  }
+}
+
+/* Firefox zoom override */
+@-moz-document url-prefix() {
+  body * {
+    transform: scale(1) !important;
+  }
+}
+
+/* Edge/IE zoom override */
+@supports (-ms-transform: scale(1)) {
+  body * {
+    -ms-transform: scale(1) !important;
+  }
+}

@@ -1,0 +1,17 @@
+/* Client Dashboard Theme */
+:root { --cl-accent: #ff6b6b; --cl-accent-2: #ff8e8e; }
+
+body { display:block; min-height:100vh; background: var(--bg-color); background-image: linear-gradient(180deg, rgba(255,107,107,0.06), transparent 40%); }
+.dashboard-container { border: 1px solid rgba(255,107,107,0.18); background: linear-gradient(180deg, #fff, #fff7f7); }
+.dashboard-container h1, .dashboard-container h2 { background: linear-gradient(135deg, var(--cl-accent), var(--cl-accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+.stat-card { border: 1px solid rgba(255,107,107,0.18); background: #ffffff; }
+.btn, .btn-download { background: linear-gradient(135deg, var(--cl-accent), var(--cl-accent-2)); box-shadow: 0 6px 16px rgba(255,107,107,0.22); }
+.btn:hover, .btn-download:hover { transform: translateY(-1px); filter: brightness(1.05); }
+
+.progress-fill { background: linear-gradient(90deg, var(--cl-accent), var(--cl-accent-2)); }
+.document-card { transition: transform .2s ease, box-shadow .2s ease; }
+.document-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+
+tr:hover td { background: rgba(255,107,107,0.05); }
+

@@ -1,0 +1,23 @@
+/* Architect Dashboard Theme */
+:root { --arc-accent: #6c63ff; --arc-accent-2: #00bcd4; }
+
+body { display:block; min-height:100vh; background: var(--bg-color); background-image: linear-gradient(180deg, rgba(108,99,255,0.07), transparent 40%); }
+.dashboard-container { border: 1px solid rgba(108,99,255,0.2); background: linear-gradient(180deg, #fff, #f6f7ff); }
+.dashboard-container h1, .dashboard-container h2 { background: linear-gradient(135deg, var(--arc-accent), var(--arc-accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+ul li { transition: transform .15s ease; }
+ul li:hover { transform: translateX(4px); }
+
+.btn { background: linear-gradient(135deg, var(--arc-accent), var(--arc-accent-2)); box-shadow: 0 6px 16px rgba(108,99,255,0.22); }
+.btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+
+table { border: 1px solid rgba(0,0,0,0.06); border-radius: 8px; overflow: hidden; }
+tr:hover td { background: rgba(108,99,255,0.05); }
+
+.progress-fill { background: linear-gradient(90deg, var(--arc-accent), var(--arc-accent-2)); }
+
+/* Scoped delete form styling (separate from global auth form) */
+.architect-delete-wrapper form { background:transparent; padding:0; border:none; width:auto; box-shadow:none; display:inline; animation:none; }
+.architect-delete-wrapper .plain-delete { font-size:.6rem; text-decoration:none; display:inline; padding:2px 4px; margin-left:4px; background:transparent; border:1px solid transparent; border-radius:4px; color:#d90429; line-height:1; width:auto; }
+.architect-delete-wrapper .plain-delete:hover { color:#fff; background:#d90429; border-color:#d90429; }
+
