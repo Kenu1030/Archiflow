@@ -1,0 +1,155 @@
+<?php
+$role = $_SESSION['role'] ?? null;
+$current = basename($_SERVER['SCRIPT_NAME']);
+$current_page = basename($_SERVER['PHP_SELF'], '.php');
+function isActive($file, $current){ return $file === $current ? ' active' : ''; }
+?>
+<aside id="sidebar" class="fixed top-0 left-0 h-full w-72 max-w-full z-40 sidebar-hidden transition-transform duration-300 ease-out" aria-label="Primary Navigation" aria-hidden="true">
+  <div class="h-full bg-white/80 backdrop-blur-glass border-r border-white/40 pt-20 pb-6 flex flex-col shadow-xl">
+    <!-- Brand (matches nav) -->
+    <div class="px-5 mb-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <span class="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-600 w-9 h-9 rounded-lg text-white shadow-md">
+            <i class="fas fa-building"></i>
+          </span>
+          <div>
+            <div class="text-sm font-bold text-gray-900 leading-4">ArchiFlow</div>
+            <div class="text-[10px] text-gray-500">Project Suite</div>
+          </div>
+        </div>
+        <button type="button" aria-label="Close sidebar" class="inline-flex items-center justify-center w-9 h-9 rounded-lg text-gray-500 hover:text-blue-600 hover:bg-gray-100 transition-colors" onclick="document.querySelector('.nav-toggle') && document.querySelector('.nav-toggle').click();">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <nav class="flex-1 overflow-y-auto px-3">
+      <a href="profile.php" class="flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-white hover:bg-blue-600 transition-colors <?php echo isActive('profile.php',$current) ? 'bg-blue-50 text-blue-700' : ''; ?>">
+        <span class="flex items-center space-x-2">
+          <i class="fas fa-user-circle w-5 text-gray-400"></i>
+          <span>Profile</span>
+        </span>
+        <?php if (isActive('profile.php',$current)): ?><i class="fas fa-circle text-[8px] text-blue-600"></i><?php endif; ?>
+      </a>
+
+      <?php if ($role === 'administrator'): ?>
+        <div class="mt-6">
+          <div class="px-3 text-[11px] uppercase tracking-wider text-gray-400 mb-2">Administration</div>
+          <?php if ($current_page !== 'admin_dashboard'): ?>
+          <a href="admin_dashboard.php" class="flex items-center px-3 py-2 rounded-lg text-sm font-medium <?php echo isActive('admin_dashboard.php',$current) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-white hover:bg-blue-600'; ?> transition-colors">
+            <i class="fas fa-gauge-high w-5 mr-2 text-gray-400"></i>
+            <span>Admin Dashboard</span>
+          </a>
+          <?php endif; ?>
+          <a href="manage_inquiries.php" class="flex items-center px-3 py-2 rounded-lg text-sm font-medium <?php echo isActive('manage_inquiries.php',$current) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-white hover:bg-blue-600'; ?> transition-colors">
+            <i class="fas fa-inbox w-5 mr-2 text-gray-400"></i>
+            <span>Public Inquiries</span>
+          </a>
+          <a href="system_settings.php" class="flex items-center px-3 py-2 rounded-lg text-sm font-medium <?php echo isActive('system_settings.php',$current) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-white hover:bg-blue-600'; ?> transition-colors">
+            <i class="fas fa-sliders-h w-5 mr-2 text-gray-400"></i>
+            <span>System Settings</span>
+          </a>
+        </div>
+      <?php endif; ?>
+
+      <?php if ($role === 'project_manager'): ?>
+        <?php if ($current_page !== 'pm_dashboard'): ?>
+        <div class="mt-6">
+          <a href="pm_dashboard.php" class="flex items-center px-3 py-2 rounded-lg text-sm font-medium <?php echo isActive('pm_dashboard.php',$current) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-white hover:bg-blue-600'; ?> transition-colors">
+            <i class="fas fa-project-diagram w-5 mr-2 text-gray-400"></i>
+            <span>Project Manager</span>
+          </a>
+        </div>
+        <?php endif; ?>
+      <?php endif; ?>
+
+      <?php if ($role === 'manager'): ?>
+        <?php if ($current_page !== 'manager_dashboard'): ?>
+        <div class="mt-6">
+          <a href="manager_dashboard.php" class="flex items-center px-3 py-2 rounded-lg text-sm font-medium <?php echo isActive('manager_dashboard.php',$current) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-white hover:bg-blue-600'; ?> transition-colors">
+            <i class="fas fa-user-tie w-5 mr-2 text-gray-400"></i>
+            <span>Manager</span>
+          </a>
+        </div>
+        <?php endif; ?>
+      <?php endif; ?>
+
+      <?php if ($role === 'hr'): ?>
+        <div class="mt-6">
+          <div class="px-3 text-[11px] uppercase tracking-wider text-gray-400 mb-2">Human Resources</div>
+          <?php if ($current_page !== 'hr_dashboard'): ?>
+          <a href="hr_dashboard.php" class="flex items-center px-3 py-2 rounded-lg text-sm font-medium <?php echo isActive('hr_dashboard.php',$current) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-white hover:bg-blue-600'; ?> transition-colors">
+            <i class="fas fa-people-group w-5 mr-2 text-gray-400"></i>
+            <span>HR Dashboard</span>
+          </a>
+          <?php endif; ?>
+          <a href="hr_employees.php" class="flex items-center px-3 py-2 rounded-lg text-sm font-medium <?php echo isActive('hr_employees.php',$current) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-white hover:bg-blue-600'; ?> transition-colors">
+            <i class="fas fa-id-badge w-5 mr-2 text-gray-400"></i>
+            <span>Employees</span>
+          </a>
+          <a href="hr_pending.php" class="flex items-center px-3 py-2 rounded-lg text-sm font-medium <?php echo isActive('hr_pending.php',$current) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-white hover:bg-blue-600'; ?> transition-colors">
+            <i class="fas fa-hourglass-half w-5 mr-2 text-gray-400"></i>
+            <span>Pending</span>
+          </a>
+          <a href="hr_attendance.php" class="flex items-center px-3 py-2 rounded-lg text-sm font-medium <?php echo isActive('hr_attendance.php',$current) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-white hover:bg-blue-600'; ?> transition-colors">
+            <i class="fas fa-calendar-check w-5 mr-2 text-gray-400"></i>
+            <span>Attendance</span>
+          </a>
+          <a href="hr_payroll.php" class="flex items-center px-3 py-2 rounded-lg text-sm font-medium <?php echo isActive('hr_payroll.php',$current) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-white hover:bg-blue-600'; ?> transition-colors">
+            <i class="fas fa-file-invoice-dollar w-5 mr-2 text-gray-400"></i>
+            <span>Payroll</span>
+          </a>
+        </div>
+      <?php endif; ?>
+
+      <?php if ($role === 'architect'): ?>
+        <div class="mt-6">
+          <div class="px-3 text-[11px] uppercase tracking-wider text-gray-400 mb-2">Architecture</div>
+          <?php if ($current_page !== 'architect_dashboard'): ?>
+          <a href="architect_dashboard.php" class="flex items-center px-3 py-2 rounded-lg text-sm font-medium <?php echo (isActive('architect_dashboard.php',$current) || str_starts_with($current,'architect_')) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-white hover:bg-blue-600'; ?> transition-colors">
+            <i class="fas fa-gem w-5 mr-2 text-gray-400"></i>
+            <span>Dashboard</span>
+          </a>
+          <?php endif; ?>
+          <a href="architect_projects.php" class="flex items-center px-3 py-2 rounded-lg text-sm font-medium <?php echo isActive('architect_projects.php',$current) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-white hover:bg-blue-600'; ?> transition-colors">
+            <i class="fas fa-cubes w-5 mr-2 text-gray-400"></i>
+            <span>My Projects</span>
+          </a>
+          <a href="feedback.php" class="flex items-center px-3 py-2 rounded-lg text-sm font-medium <?php echo isActive('feedback.php',$current) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-white hover:bg-blue-600'; ?> transition-colors">
+            <i class="fas fa-comments w-5 mr-2 text-gray-400"></i>
+            <span>Collaborate</span>
+          </a>
+        </div>
+      <?php endif; ?>
+
+      <?php if ($role === 'contractor'): ?>
+        <?php if ($current_page !== 'contractor_dashboard'): ?>
+        <div class="mt-6">
+          <a href="contractor_dashboard.php" class="flex items-center px-3 py-2 rounded-lg text-sm font-medium <?php echo isActive('contractor_dashboard.php',$current) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-white hover:bg-blue-600'; ?> transition-colors">
+            <i class="fas fa-hard-hat w-5 mr-2 text-gray-400"></i>
+            <span>Contractor</span>
+          </a>
+        </div>
+        <?php endif; ?>
+      <?php endif; ?>
+
+      <?php if ($role === 'client'): ?>
+        <?php if ($current_page !== 'client_dashboard'): ?>
+        <div class="mt-6">
+          <a href="client_dashboard.php" class="flex items-center px-3 py-2 rounded-lg text-sm font-medium <?php echo isActive('client_dashboard.php',$current) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-white hover:bg-blue-600'; ?> transition-colors">
+            <i class="fas fa-handshake w-5 mr-2 text-gray-400"></i>
+            <span>Client Portal</span>
+          </a>
+        </div>
+        <?php endif; ?>
+      <?php endif; ?>
+    </nav>
+
+    <div class="mt-4 px-3">
+      <a href="logout.php" class="flex items-center justify-center w-full px-3 py-2 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-sm">
+        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+      </a>
+    </div>
+  </div>
+</aside>

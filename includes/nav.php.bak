@@ -1,0 +1,100 @@
+<?php
+$role = $_SESSION['role'] ?? null;
+$full_name = $_SESSION['full_name'] ?? '';
+$current_page = basename($_SERVER['PHP_SELF'], '.php');
+?>
+<header class="w-full z-30">
+  <div class="w-full px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 bg-white/80 backdrop-blur-glass rounded-xl mt-4 px-4 shadow-sm border border-white/40">
+      <!-- Left: Sidebar toggle + Brand -->
+      <div class="flex items-center space-x-3">
+        <button id="sidebarToggle" class="nav-toggle inline-flex items-center justify-center w-10 h-10 rounded-lg text-gray-600 hover:text-blue-600 hover:bg-gray-100 transition-colors" aria-label="Toggle sidebar" aria-controls="sidebar" aria-expanded="false">
+          <i class="fas fa-bars"></i>
+        </button>
+        <a href="index.php" class="flex items-center space-x-2">
+          <span class="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-600 w-9 h-9 rounded-lg text-white shadow-md">
+            <i class="fas fa-building"></i>
+          </span>
+          <span class="hidden sm:block">
+            <span class="block text-sm font-bold text-gray-900 leading-4">ArchiFlow</span>
+            <span class="block text-[10px] text-gray-500">Project Suite</span>
+          </span>
+        </a>
+      </div>
+
+      <!-- Center: Quick role links -->
+      <nav class="hidden md:block">
+        <ul class="flex items-center gap-2">
+          <?php if ($role === 'administrator'): ?>
+            <?php if ($current_page !== 'admin_dashboard'): ?>
+              <li>
+                <a href="admin_dashboard.php" class="px-3 py-1.5 rounded-full text-sm font-medium text-gray-700 hover:text-white hover:bg-blue-600 transition-colors">Admin</a>
+              </li>
+            <?php endif; ?>
+          <?php endif; ?>
+
+          <?php if ($role === 'project_manager'): ?>
+            <?php if ($current_page !== 'pm_dashboard'): ?>
+              <li>
+                <a href="pm_dashboard.php" class="px-3 py-1.5 rounded-full text-sm font-medium text-gray-700 hover:text-white hover:bg-blue-600 transition-colors">PM</a>
+              </li>
+            <?php endif; ?>
+          <?php endif; ?>
+
+          <?php if ($role === 'manager'): ?>
+            <?php if ($current_page !== 'manager_dashboard'): ?>
+              <li>
+                <a href="manager_dashboard.php" class="px-3 py-1.5 rounded-full text-sm font-medium text-gray-700 hover:text-white hover:bg-blue-600 transition-colors">Manager</a>
+              </li>
+            <?php endif; ?>
+          <?php endif; ?>
+
+          <?php if ($role === 'hr'): ?>
+            <?php if ($current_page !== 'hr_dashboard'): ?>
+              <li>
+                <a href="hr_dashboard.php" class="px-3 py-1.5 rounded-full text-sm font-medium text-gray-700 hover:text-white hover:bg-blue-600 transition-colors">HR</a>
+              </li>
+            <?php endif; ?>
+          <?php endif; ?>
+
+          <?php if ($role === 'architect'): ?>
+            <?php if ($current_page !== 'architect_dashboard'): ?>
+              <li>
+                <a href="architect_dashboard.php" class="px-3 py-1.5 rounded-full text-sm font-medium text-gray-700 hover:text-white hover:bg-blue-600 transition-colors">Architect</a>
+              </li>
+            <?php endif; ?>
+          <?php endif; ?>
+
+          <?php if ($role === 'contractor'): ?>
+            <?php if ($current_page !== 'contractor_dashboard'): ?>
+              <li>
+                <a href="contractor_dashboard.php" class="px-3 py-1.5 rounded-full text-sm font-medium text-gray-700 hover:text-white hover:bg-blue-600 transition-colors">Contractor</a>
+              </li>
+            <?php endif; ?>
+          <?php endif; ?>
+
+          <?php if ($role === 'client'): ?>
+            <?php if ($current_page !== 'client_dashboard'): ?>
+              <li>
+                <a href="client_dashboard.php" class="px-3 py-1.5 rounded-full text-sm font-medium text-gray-700 hover:text-white hover:bg-blue-600 transition-colors">Client</a>
+              </li>
+            <?php endif; ?>
+          <?php endif; ?>
+        </ul>
+      </nav>
+
+      <!-- Right: User -->
+      <div class="flex items-center space-x-3">
+        <div class="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-full bg-gray-50 border border-gray-200">
+          <span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs">
+            <i class="fas fa-user"></i>
+          </span>
+          <span class="text-sm font-medium text-gray-700 truncate max-w-[140px]" title="<?php echo htmlspecialchars($full_name); ?>"><?php echo htmlspecialchars($full_name); ?></span>
+        </div>
+        <a class="inline-flex items-center px-3 py-2 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-sm" href="logout.php">
+          <i class="fas fa-sign-out-alt mr-2"></i>Logout
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
